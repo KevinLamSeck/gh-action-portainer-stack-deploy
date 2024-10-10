@@ -1,8 +1,8 @@
-import { PortainerApi } from './api'
-import path from 'path'
+import * as core from '@actions/core'
 import fs from 'fs'
 import Handlebars from 'handlebars'
-import * as core from '@actions/core'
+import path from 'path'
+import { PortainerApi } from './api'
 
 type DeployStack = {
   portainerHost: string
@@ -128,7 +128,6 @@ export async function deployStack({
     core.info('⛔️ Something went wrong during deployment!')
     throw error
   } finally {
-    core.info(`Logging out from Portainer instance...`)
-    await portainerApi.logout()
+    core.info(`✅ Done`)
   }
 }

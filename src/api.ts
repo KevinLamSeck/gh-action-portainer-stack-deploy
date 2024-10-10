@@ -1,3 +1,4 @@
+import * as core from '@actions/core'
 import axios from 'axios'
 
 type EnvVariables = Array<{
@@ -42,7 +43,11 @@ export class PortainerApi {
   }
 
   async logout(): Promise<void> {
-    await this.axiosInstance.post('/auth/logout')
+    try {
+      await this.axiosInstance.post('/auth/logout', null, { timeout: 5000 })
+    } catch (error) {
+      core.info(`Logout failed: ${error}`)
+    }
     this.axiosInstance.defaults.headers.common['Authorization'] = ''
   }
 
