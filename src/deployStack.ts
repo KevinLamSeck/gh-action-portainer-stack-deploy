@@ -110,6 +110,9 @@ export async function deployStack({
         )
       }
       core.info('Deploying new stack...')
+      core.info(
+        '⚠️ Warning: POST /stacks is deprecated since Portainer 2.27. Please create the stack manually in Portainer first.'
+      )
       await portainerApi.createStack(
         {
           type: swarmId ? StackType.SWARM : StackType.COMPOSE,
